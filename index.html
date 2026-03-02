@@ -11,7 +11,7 @@
 html, body, #map { height:100%; margin:0; }
 #map, .leaflet-container{ background:#1f73b7; }
 
-/* HUD abajo izquierda (selector + búsqueda) */
+/* HUD abajo izquierda */
 .hud-bottom{
   position:absolute; left:14px; bottom:14px; z-index:3000;
   display:flex; gap:10px; align-items:center; flex-wrap:wrap;
@@ -25,104 +25,52 @@ html, body, #map { height:100%; margin:0; }
   box-shadow: 0 10px 24px rgba(0,0,0,.35);
   color:#fff;
 }
-.pill select, .pill input{
-  border:0; outline:0; background:transparent; color:#fff; font-size:13px;
+.pill input{
+  border:0; outline:0; background:transparent; color:#fff;
 }
-.pill select{ width:240px; max-width:55vw; }
-.pill input{ width:220px; max-width:55vw; }
-.pill .dot{
-  width:9px; height:9px; border-radius:999px;
-  background:#a56bff; box-shadow:0 0 0 3px rgba(165,107,255,.20);
-  flex:0 0 auto;
-}
-.pill .label{ font-size:13px; opacity:.9; user-select:none; white-space:nowrap; }
-.btn-clear{
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.08);
-  color:#fff; border-radius:6px;
-  padding:8px 10px; cursor:pointer;
-  transition:.18s; font-size:12px;
-}
-.btn-clear:hover{ background:rgba(255,255,255,.14); transform: translateY(-1px); }
-.searchMeta{ font-size:12px; opacity:.8; margin-left:6px; }
+.pill .label{ font-size:13px; opacity:.9; white-space:nowrap; }
 
-/* HUD auth arriba derecha */
-.hud-auth{
-  position:absolute; right:14px; top:14px; z-index:3000;
-  display:flex; gap:10px; align-items:center;
-  padding:10px 12px; border-radius:10px;
-  background:rgba(0,0,0,.45);
-  border:1px solid rgba(255,255,255,.10);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 30px rgba(0,0,0,.30);
-  color:#fff;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-}
-#userInfo{
-  font-size:12px; opacity:.9;
-  max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
-.hud-auth button{
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.08);
-  color:#fff; border-radius:8px;
-  padding:8px 10px; cursor:pointer;
-  transition:.18s; font-size:12px;
-}
-.hud-auth button:hover{ background:rgba(255,255,255,.14); transform: translateY(-1px); }
-
-/* Logo arriba derecha */
-.brand-logo{
-  position:absolute; right:18px; top:70px; z-index:2500;
-  width:220px; opacity:.95; pointer-events:none;
-  filter: drop-shadow(0 14px 28px rgba(0,0,0,.55));
-}
-
-/* Selector capas abajo derecha (pro) */
 .layerBtns{
   display:flex; gap:8px; align-items:center; padding:10px;
 }
 .layerBtn{
   border:1px solid rgba(255,255,255,.12);
   background:rgba(0,0,0,.55);
-  backdrop-filter: blur(10px);
   color:#fff;
   border-radius:8px;
   padding:8px 12px;
   cursor:pointer;
   font-size:12px;
-  user-select:none;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  transition:.18s;
-  opacity:.95;
 }
-.layerBtn:hover{ transform: translateY(-1px); background:rgba(0,0,0,.62); }
 .layerBtn.active{
   background:rgba(255,255,255,.14);
-  border-color: rgba(255,255,255,.22);
 }
 
-@media (max-width: 520px){
-  .hud-auth{ right:50%; transform:translateX(50%); }
-  .brand-logo{ right:50%; transform:translateX(50%); width:170px; top:74px; }
-  .pill select{ width:200px; }
-  .pill input{ width:170px; }
+.brand-logo{
+  position:absolute; right:18px; top:70px;
+  width:200px;
+  pointer-events:none;
 }
 
-/* Popups + modal */
-.popup-img{ width:260px; max-width:100%; border-radius:10px; margin-top:8px; cursor:pointer; }
-.popup-actions{ margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
-.popup-actions button{ background:#b30000; color:#fff; border:0; padding:7px 10px; border-radius:10px; cursor:pointer; }
-.popup-actions button.secondary{ background:#333; }
+.popup-img{
+  width:260px;
+  border-radius:10px;
+  margin-top:8px;
+  cursor:pointer;
+}
 
 #imageModal{
-  display:none; position:fixed; z-index:5000;
-  left:0;top:0; width:100%; height:100%;
+  display:none;
+  position:fixed;
+  z-index:5000;
+  left:0;top:0;
+  width:100%; height:100%;
   background:rgba(0,0,0,0.85);
   justify-content:center; align-items:center;
 }
-#imageModal img{ max-width:90%; max-height:90%; border-radius:12px; }
-#imageModal span{ position:absolute; top:20px; right:30px; color:white; font-size:30px; cursor:pointer; }
+#imageModal img{
+  max-width:90%; max-height:90%;
+}
 </style>
 </head>
 
@@ -130,32 +78,17 @@ html, body, #map { height:100%; margin:0; }
 
 <div class="hud-bottom">
   <div class="pill">
-    <select id="markerSelect">
-      <option value="">Selecciona un marcador...</option>
-    </select>
-  </div>
-
-  <div class="pill">
-    <span class="dot"></span>
+    <img src="origen.png" style="width:22px;height:22px;">
     <span class="label">Búsqueda por nombre</span>
-    <input id="searchInput" type="text" />
-    <button class="btn-clear" id="btnClearSearch" title="Limpiar">✖</button>
-    <span id="searchInfo" class="searchMeta"></span>
+    <input id="searchInput" type="text">
   </div>
 </div>
 
-<div class="hud-auth">
-  <span id="userInfo">No logueado</span>
-  <button id="btnLogin">Entrar con Google</button>
-  <button id="btnLogout" style="display:none;">Salir</button>
-</div>
-
-<img src="origen.png" class="brand-logo" alt="Logo" onerror="this.style.display='none'">
+<img src="origen.png" class="brand-logo">
 
 <div id="map"></div>
 
-<div id="imageModal" onclick="closeModal()">
-  <span onclick="closeModal()">✖</span>
+<div id="imageModal" onclick="this.style.display='none'">
   <img id="modalImg">
 </div>
 
@@ -173,7 +106,7 @@ import {
   GoogleAuthProvider, signInWithPopup, signOut
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-/* CONFIG */
+/* FIREBASE */
 const firebaseConfig = {
   apiKey: "AIzaSyBBBfkurAGsebtIfRJTTejXkPQYmxD-Lew",
   authDomain: "puntos-origen.firebaseapp.com",
@@ -183,302 +116,115 @@ const firebaseConfig = {
   appId: "1:791814298746:web:9ed731d8288e70292dafc3"
 };
 
-const ADMIN_EMAILS = ["iru324@gmail.com","maitane3004@gmail.com"];
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-let currentUser=null;
-function isAdmin(){ return currentUser && ADMIN_EMAILS.includes(currentUser.email); }
-
-/* LOGIN */
-const btnLogin=document.getElementById("btnLogin");
-const btnLogout=document.getElementById("btnLogout");
-const userInfo=document.getElementById("userInfo");
-
-btnLogin.onclick=async()=>{
-  const provider=new GoogleAuthProvider();
-  await signInWithPopup(auth,provider);
-};
-btnLogout.onclick=async()=>{ await signOut(auth); };
-
-onAuthStateChanged(auth,user=>{
-  currentUser=user;
-  if(user){
-    userInfo.textContent=user.email+(isAdmin()?" (ADMIN)":"");
-    btnLogin.style.display="none";
-    btnLogout.style.display="inline-block";
-  } else {
-    userInfo.textContent="No logueado";
-    btnLogin.style.display="inline-block";
-    btnLogout.style.display="none";
-  }
-  refreshPopups();
+/* MAPA */
+const map = L.map("map", {
+  crs: L.CRS.Simple,
+  minZoom: 0,
+  maxZoom: 7
 });
 
-/* ========= MAPA (igual filosofía que gta-5-map: CRS.Simple + bounds) ========= */
-const map = L.map("map", { crs: L.CRS.Simple, minZoom: 3, maxZoom: 7 });
+const roadLayer = L.tileLayer("tiles/road/{z}/{x}/{y}.jpg", {
+  tileSize: 256,
+  noWrap: true
+});
 
-/* ✅ Tiles LOCALES (pro, estables)
-   - Road:      /tiles/road/{z}-{x}_{y}.png
-   - Atlas:     /tiles/atlas/{z}-{x}_{y}.png
-   - Satellite: /tiles/satellite/{z}-{x}_{y}.png (opcional)
-*/
-const roadLayer = L.tileLayer("tiles/road/{z}-{x}_{y}.png", { tileSize:256, noWrap:true });
-const atlasLayer = L.tileLayer("tiles/atlas/{z}-{x}_{y}.png", { tileSize:256, noWrap:true });
-const satelliteLayer = L.tileLayer("tiles/satellite/{z}-{x}_{y}.png", { tileSize:256, noWrap:true });
+const atlasLayer = L.tileLayer("tiles/atlas/{z}/{x}/{y}.jpg", {
+  tileSize: 256,
+  noWrap: true
+});
 
-/* Activa por defecto ROAD */
+const satelliteLayer = L.tileLayer("tiles/satellite/{z}/{x}/{y}.jpg", {
+  tileSize: 256,
+  noWrap: true
+});
+
 roadLayer.addTo(map);
 let activeBase = "Road";
 
-/* Bounds para que no “flote” ni se vea infinito.
-   Si tus tiles vienen de un pack estándar GTA, esto suele funcionar bien.
-   (Si luego quieres, lo afinamos a tu pack exacto.)
-*/
+/* Bounds reales */
 const tileSize = 256;
-const w = tileSize * 2;
-const h = tileSize * 3;
-const southWest = map.unproject([0, h], 0);
-const northEast = map.unproject([w, 0], 0);
-const bounds = L.latLngBounds(southWest, northEast);
+const size = tileSize * Math.pow(2, 7);
+
+const southWest = map.unproject([0, size], 7);
+const northEast = map.unproject([size, 0], 7);
+const bounds = new L.LatLngBounds(southWest, northEast);
+
 map.setMaxBounds(bounds);
 map.fitBounds(bounds);
 
-/* Control capas bottomright (Road/Atlas/Satellite).
-   Si quieres SOLO 2 modos, borra el botón Satellite y el case.
-*/
-const LayersControl = L.Control.extend({
-  options: { position: "bottomright" },
-  onAdd(){
-    const div = L.DomUtil.create("div", "layerBtns");
-    div.innerHTML = `
-      <div class="layerBtn active" data-layer="Road">Road</div>
-      <div class="layerBtn" data-layer="Atlas">Atlas</div>
-      <div class="layerBtn" data-layer="Satellite">Satellite</div>
-    `;
-    L.DomEvent.disableClickPropagation(div);
-    L.DomEvent.disableScrollPropagation(div);
-
-    div.querySelectorAll(".layerBtn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const name = btn.getAttribute("data-layer");
-        switchBase(name);
-      });
-    });
-    return div;
-  }
-});
-map.addControl(new LayersControl());
-
-function setActiveBtn(name){
-  document.querySelectorAll(".layerBtn").forEach(b=>{
-    b.classList.toggle("active", b.getAttribute("data-layer") === name);
+/* BOTONES */
+const control = L.control({position:"bottomright"});
+control.onAdd = function(){
+  const div = L.DomUtil.create("div","layerBtns");
+  div.innerHTML = `
+    <div class="layerBtn active" data-layer="Road">Road</div>
+    <div class="layerBtn" data-layer="Atlas">Atlas</div>
+    <div class="layerBtn" data-layer="Satellite">Satellite</div>
+  `;
+  div.querySelectorAll(".layerBtn").forEach(btn=>{
+    btn.onclick = ()=>{
+      const name = btn.dataset.layer;
+      switchBase(name);
+    }
   });
+  return div;
 }
+control.addTo(map);
 
 function switchBase(name){
-  if(name === activeBase) return;
-
-  // quita todas
   if(map.hasLayer(roadLayer)) map.removeLayer(roadLayer);
   if(map.hasLayer(atlasLayer)) map.removeLayer(atlasLayer);
   if(map.hasLayer(satelliteLayer)) map.removeLayer(satelliteLayer);
 
-  if(name === "Road") roadLayer.addTo(map);
-  if(name === "Atlas") atlasLayer.addTo(map);
-  if(name === "Satellite") satelliteLayer.addTo(map);
+  if(name==="Road") roadLayer.addTo(map);
+  if(name==="Atlas") atlasLayer.addTo(map);
+  if(name==="Satellite") satelliteLayer.addTo(map);
 
-  activeBase = name;
-  setActiveBtn(name);
+  document.querySelectorAll(".layerBtn").forEach(b=>{
+    b.classList.toggle("active", b.dataset.layer===name);
+  });
 }
 
-/* ICONOS */
-const redIcon=L.icon({
+/* MARCADORES FIREBASE */
+const colRef = collection(db,"markers");
+const q = query(colRef,orderBy("createdAt","asc"));
+
+const redIcon = L.icon({
   iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
   shadowUrl:"https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize:[25,41],
-  iconAnchor:[12,41],
-  popupAnchor:[1,-34],
-  shadowSize:[41,41]
-});
-const hiIcon=L.icon({
-  iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png",
-  shadowUrl:"https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize:[25,41],
-  iconAnchor:[12,41],
-  popupAnchor:[1,-34],
-  shadowSize:[41,41]
+  iconAnchor:[12,41]
 });
 
-/* MODAL */
-window.openImage=function(src){
-  document.getElementById("modalImg").src=src;
-  document.getElementById("imageModal").style.display="flex";
-};
-window.closeModal=function(){
-  document.getElementById("imageModal").style.display="none";
-};
-
-/* MARCADORES */
-const colRef=collection(db,"markers");
-const q=query(colRef,orderBy("createdAt","asc"));
-const markers=new Map();
-
-/* HUD: selector */
-const markerSelect = document.getElementById("markerSelect");
-function rebuildSelect(){
-  const current = markerSelect.value;
-  const arr = Array.from(markers.entries())
-    .map(([id, obj]) => ({ id, title: (obj.data.title || "").trim() }))
-    .sort((a,b)=>a.title.localeCompare(b.title, "es", { sensitivity:"base" }));
-
-  markerSelect.innerHTML =
-    `<option value="">Selecciona un marcador...</option>` +
-    arr.map(x => `<option value="${x.id}">${x.title || "(sin título)"}</option>`).join("");
-
-  if(current && markers.has(current)) markerSelect.value = current;
-}
-
-markerSelect.addEventListener("change", ()=>{
-  const id = markerSelect.value;
-  if(!id) return;
-  const m = markers.get(id)?.marker;
-  if(!m) return;
-  map.setView(m.getLatLng(), Math.max(map.getZoom(), 5));
-  m.openPopup();
-});
-
-/* BUSCADOR */
-const searchInput = document.getElementById("searchInput");
-const btnClearSearch = document.getElementById("btnClearSearch");
-const searchInfo = document.getElementById("searchInfo");
-
-function norm(s){ return String(s||"").toLowerCase().trim(); }
-function matchesQuery(data, qtext){
-  if(!qtext) return true;
-  const hay = (data.title||"") + " " + (data.desc||"");
-  return norm(hay).includes(qtext);
-}
-
-function applySearch(){
-  const qtext = norm(searchInput.value);
-  let count = 0;
-
-  for(const [id, obj] of markers.entries()){
-    const ok = matchesQuery(obj.data, qtext);
-
-    if(!qtext){
-      obj.marker.setIcon(redIcon);
-      obj.marker.setOpacity(1);
-      obj.marker.setZIndexOffset(0);
-    } else if(ok){
-      count++;
-      obj.marker.setIcon(hiIcon);
-      obj.marker.setOpacity(1);
-      obj.marker.setZIndexOffset(1000);
-    } else {
-      obj.marker.setIcon(redIcon);
-      obj.marker.setOpacity(0.25);
-      obj.marker.setZIndexOffset(0);
-    }
-  }
-  searchInfo.textContent = qtext ? `${count} resultado(s)` : "";
-  refreshPopups();
-}
-
-searchInput.addEventListener("input", applySearch);
-btnClearSearch.onclick = ()=>{ searchInput.value=""; applySearch(); };
-
-/* POPUP */
-function popupHtml(id,data){
-  const img=data.img
-    ? `<img src="${data.img}" class="popup-img" onclick="openImage('${data.img}')">`
-    : "";
-
-  const canEdit = currentUser && (isAdmin() || data.uid === currentUser.uid);
-
-  const buttons = canEdit ? `
-    <div class="popup-actions">
-      <button class="secondary" onclick="window.editMarker('${id}')">Editar</button>
-      ${isAdmin() ? `<button onclick="window.deleteMarker('${id}')">Borrar</button>` : ``}
-    </div>` : "";
-
-  return `<b>${data.title}</b><br>${data.desc||""}${img}${buttons}`;
-}
-
-function refreshPopups(){
-  markers.forEach((m,id)=>{
-    m.marker.setPopupContent(popupHtml(id,m.data));
-  });
-}
-
-/* REALTIME */
 onSnapshot(q,snap=>{
   snap.docChanges().forEach(ch=>{
-    const id=ch.doc.id;
-    const data=ch.doc.data();
+    const data = ch.doc.data();
+    const id = ch.doc.id;
 
-    if(ch.type==="removed"){
-      if(markers.has(id)) map.removeLayer(markers.get(id).marker);
-      markers.delete(id);
-    } else {
-      if(markers.has(id)) map.removeLayer(markers.get(id).marker);
-      const marker=L.marker([data.lat,data.lng],{icon:redIcon}).addTo(map);
-      marker.bindPopup(popupHtml(id,data));
-      markers.set(id,{marker,data});
+    if(ch.type==="added"){
+      const marker = L.marker([data.lat,data.lng],{icon:redIcon}).addTo(map);
+      marker.bindPopup(`<b>${data.title}</b><br>${data.desc||""}`);
     }
   });
-
-  rebuildSelect();
-  applySearch();
 });
 
 /* CREAR */
 map.on("click",async e=>{
-  if(!currentUser){ alert("Debes iniciar sesión"); return; }
-
   const title=prompt("Título:");
   if(!title) return;
-
-  const desc=prompt("Descripción:")||"";
-  const img=prompt("Enlace imagen (opcional):")||"";
-
   await addDoc(colRef,{
-    title,desc,img,
+    title,
+    desc:"",
     lat:e.latlng.lat,
     lng:e.latlng.lng,
-    createdAt:serverTimestamp(),
-    uid:currentUser.uid,
-    email:currentUser.email
+    createdAt:serverTimestamp()
   });
 });
-
-/* BORRAR */
-window.deleteMarker=async id=>{
-  if(!isAdmin()) return;
-  await deleteDoc(doc(db,"markers",id));
-};
-
-/* EDITAR */
-window.editMarker=async id=>{
-  const data=markers.get(id).data;
-  if(!(isAdmin() || (currentUser && data.uid===currentUser.uid))) return;
-
-  const newTitle=prompt("Nuevo título:",data.title);
-  if(!newTitle) return;
-
-  const newDesc=prompt("Nueva descripción:",data.desc||"");
-  const newImg=prompt("Nuevo enlace imagen:",data.img||"");
-
-  await updateDoc(doc(db,"markers",id),{
-    title:newTitle,
-    desc:newDesc,
-    img:newImg,
-    updatedAt:serverTimestamp()
-  });
-};
 </script>
+
 </body>
 </html>
